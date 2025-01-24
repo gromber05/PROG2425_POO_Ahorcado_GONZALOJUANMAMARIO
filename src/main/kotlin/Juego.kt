@@ -2,24 +2,18 @@ package es.iesra.prog2425_ahorcado
 
 class Juego(palabra: Palabra, jugador: Jugador) {
 
-    companion object {
-        val CONFIG_INTENTOS = 5
-    }
-
     fun iniciar(palabra: Palabra) {
         println("¡Bienvenido al juego del Ahorcado!" +
-                "La palabara tiene $n letras".trimIndent())
+                "La palabara tiene ${palabra.palabraOculta.length+1} letras".trimIndent())
 
-        val intentos = CONFIG_INTENTOS
-        var palabraAcertada = false
-        val letrasUsadas = mutableListOf<String>()
-
-        while ((intentos > 0)) {
+        while ((intentos > 0) or !palabra.esCompleta()) {
             println("Palabra: $" +
                     "Intentos restantes: $" +
                     "Letras usadas: $" +
                     "Introduce una letra: ".trimIndent())
+
             val letra: Char = readln().lowercase().firstOrNull()!!.toChar()
+            val letrasUsadas = mutableListOf<Char>()
 
             if (letrasUsadas.contains(letra.toString()) or !letra.isLetter()) {
                 println("Letra no válida o ya utilizada. Intenta otra vez.")
@@ -29,9 +23,7 @@ class Juego(palabra: Palabra, jugador: Jugador) {
                 println("¡Bien hecho! La letra '$letra' está en la palabra.")
             }
 
-            if (palabraAcertada) {
-
-            }
+            if (palabra.esCompleta()) return
         }
 
         if (palabra.esCompleta()) {

@@ -7,7 +7,11 @@ import io.ktor.client.request.*
 import io.ktor.serialization.gson.*
 import kotlinx.coroutines.runBlocking
 
-class Palabra(val palabraOculta: String, private val progreso: ArrayList<Char>) {
+class Palabra(val palabraOculta: String, private val progreso: MutableList<Char>) {
+
+    init {
+        for (i in 0..palabraOculta.length) progreso.add('_')
+    }
 
     fun revelarLetra(letra: Char) {
         var i = 0
@@ -19,9 +23,7 @@ class Palabra(val palabraOculta: String, private val progreso: ArrayList<Char>) 
         }
     }
 
-    fun obtenerProgreso() {
-        TODO()
-    }
+    fun obtenerProgreso() = progreso.joinToString(" ")
 
     fun esCompleta() = '_' !in progreso
 }
