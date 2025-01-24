@@ -1,12 +1,12 @@
 package es.iesra.prog2425_ahorcado
 
-class Juego(palabra: Palabra, jugador: Jugador) {
+class Juego(val palabra: Palabra, val jugador: Jugador) {
 
-    fun iniciar(palabra: Palabra) {
+    fun iniciar() {
         println("¡Bienvenido al juego del Ahorcado!" +
                 "La palabara tiene ${palabra.palabraOculta.length+1} letras".trimIndent())
 
-        while ((intentos > 0) or !palabra.esCompleta()) {
+        while ((jugador.intentos > 0) or !palabra.esCompleta()) {
             println("Palabra: $" +
                     "Intentos restantes: $" +
                     "Letras usadas: $" +
@@ -15,11 +15,11 @@ class Juego(palabra: Palabra, jugador: Jugador) {
             val letra: Char = readln().lowercase().firstOrNull()!!.toChar()
             val letrasUsadas = mutableListOf<Char>()
 
-            if (letrasUsadas.contains(letra.toString()) or !letra.isLetter()) {
+            if (letrasUsadas.contains(letra) or !letra.isLetter()) {
                 println("Letra no válida o ya utilizada. Intenta otra vez.")
             }
 
-            if (letra in palabraOculta) {
+            if (letra in palabra.palabraOculta) {
                 println("¡Bien hecho! La letra '$letra' está en la palabra.")
             }
 

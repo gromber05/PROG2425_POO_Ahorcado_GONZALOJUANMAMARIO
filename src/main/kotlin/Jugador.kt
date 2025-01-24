@@ -1,8 +1,10 @@
 package es.iesra.prog2425_ahorcado
 
-class Jugador(maxIntentos: Int, letrasUsadas: MutableList<Char>) {
+class Jugador(intentosMaximos: Int, letrasUsadas: MutableList<Char>) {
 
-    private var intentos: Int = maxIntentos
+    var intentos: Int = intentosMaximos
+        get() = field
+        private set
 
     private var letrasUsadas: MutableList<Char> = mutableListOf()
 
