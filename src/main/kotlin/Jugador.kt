@@ -22,5 +22,4 @@ class Jugador(maxIntentos: Int, letrasUsadas: MutableList<Char>) {
     }
 
     fun obtenerLetrasUsadas() = letrasUsadas.joinToString(" ")
-
 }
