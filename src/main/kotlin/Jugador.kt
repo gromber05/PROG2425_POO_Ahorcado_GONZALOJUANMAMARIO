@@ -16,6 +16,7 @@ class Jugador(intentosMaximos: Int, letrasUsadas: MutableList<Char>) {
         } else {
             return false
         }
+
     }
 
     fun fallarIntento() {

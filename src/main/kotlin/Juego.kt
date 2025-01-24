@@ -13,9 +13,8 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
                     "Introduce una letra: ".trimIndent())
 
             val letra: Char = readln().lowercase().firstOrNull()!!.toChar()
-            val letrasUsadas = mutableListOf<Char>()
 
-            if (letrasUsadas.contains(letra) or !letra.isLetter()) {
+            if (jugador.intentarLetra(letra) or !letra.isLetter()) {
                 println("Letra no válida o ya utilizada. Intenta otra vez.")
             }
 
