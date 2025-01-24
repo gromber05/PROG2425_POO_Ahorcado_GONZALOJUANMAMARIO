@@ -6,7 +6,7 @@ class Juego(palabra: Palabra, jugador: Jugador) {
         val CONFIG_INTENTOS = 5
     }
 
-    fun iniciar(n: Int) {
+    fun iniciar(palabra: Palabra) {
         println("¡Bienvenido al juego del Ahorcado!" +
                 "La palabara tiene $n letras".trimIndent())
 
@@ -14,17 +14,32 @@ class Juego(palabra: Palabra, jugador: Jugador) {
         var palabraAcertada = false
         val letrasUsadas = mutableListOf<String>()
 
-        while ((intentos > 0) and (palabraAcertada == false)) {
+        while ((intentos > 0)) {
             println("Palabra: $" +
                     "Intentos restantes: $" +
                     "Letras usadas: $" +
                     "Introduce una letra: ".trimIndent())
-            val letra = readln().lowercase().firstOrNull()
+            val letra: Char = readln().lowercase().firstOrNull()!!.toChar()
 
-            if (letrasUsadas.contains(letra.toString())) {
+            if (letrasUsadas.contains(letra.toString()) or !letra.isLetter()) {
+                println("Letra no válida o ya utilizada. Intenta otra vez.")
+            }
+
+            if (letra in palabraOculta) {
+                println("¡Bien hecho! La letra '$letra' está en la palabra.")
+            }
+
+            if (palabraAcertada) {
 
             }
         }
+
+        if (palabra.esCompleta()) {
+            println("\n¡Felicidades! Has adivinado la palabra: ${palabra.obtenerProgreso()}")
+        } else {
+            println("\nLo siento, te has quedado sin intentos. La palabra era: ${palabra.palabraOculta}")
+        }
+
 
     }
 
