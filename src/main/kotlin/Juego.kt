@@ -7,9 +7,9 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
                 "La palabara tiene ${palabra.palabraOculta.length+1} letras".trimIndent())
 
         while ((jugador.intentos > 0) or !palabra.esCompleta()) {
-            println("Palabra: $" +
-                    "Intentos restantes: $" +
-                    "Letras usadas: $" +
+            println("Palabra: ${palabra.obtenerProgreso()}" +
+                    "Intentos restantes: ${jugador.intentos}" +
+                    "Letras usadas: ${jugador.obtenerLetrasUsadas()}" +
                     "Introduce una letra: ".trimIndent())
 
             val letra: Char = readln().lowercase().firstOrNull()!!.toChar()

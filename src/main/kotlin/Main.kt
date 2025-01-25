@@ -31,6 +31,9 @@ fun Char.quitarAcentos(): Char {
     sobre el cual la función de extensión será llamada. Dentro de la función de extensión, puedes acceder
     a las propiedades y métodos de esta instancia utilizando this.
     */
+
+    
+
 }
 
 /**
