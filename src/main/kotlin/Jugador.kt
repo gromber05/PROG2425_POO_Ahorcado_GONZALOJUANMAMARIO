@@ -22,7 +22,6 @@ class Jugador(intentosMaximos: Int) {
     }
 
     fun fallarIntento() {
-        if (intentos > 0)
             --intentos
     }
 

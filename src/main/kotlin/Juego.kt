@@ -3,26 +3,31 @@ package es.iesra.prog2425_ahorcado
 class Juego(val palabra: Palabra, val jugador: Jugador) {
 
     fun iniciar() {
-        println("¡Bienvenido al juego del Ahorcado!" +
-                "La palabara tiene ${palabra.palabraOculta.length+1} letras".trimIndent())
+        println("¡Bienvenido al juego del Ahorcado!")
+        println("La palabara tiene ${palabra.palabraOculta.length+1} letras")
 
-        while ((jugador.intentos > 0) or !palabra.esCompleta()) {
-            println("Palabra: ${palabra.obtenerProgreso()}" +
-                    "Intentos restantes: ${jugador.intentos}" +
-                    "Letras usadas: ${jugador.obtenerLetrasUsadas()}" +
-                    "Introduce una letra: ".trimIndent())
+        while ((jugador.intentos >= 0)) {
+            println("Palabra: ${palabra.obtenerProgreso()}")
+            println("Intentos restantes: ${jugador.intentos}")
+            println("Letras usadas: ${jugador.obtenerLetrasUsadas()}")
+            println("Introduce una letra: ")
 
             val letra: Char = readln().lowercase().firstOrNull()!!.toChar()
+            require(letra.isLetter())
 
-            if (jugador.intentarLetra(letra) or !letra.isLetter()) {
+            if (!jugador.intentarLetra(letra)) {
                 println("Letra no válida o ya utilizada. Intenta otra vez.")
             }
 
             if (letra in palabra.palabraOculta) {
                 println("¡Bien hecho! La letra '$letra' está en la palabra.")
+                jugador.intentarLetra(letra)
+                palabra.revelarLetra(letra)
             }
 
-            if (palabra.esCompleta()) return
+            if (palabra.esCompleta()) {
+                return
+            }
         }
 
         if (palabra.esCompleta()) {
