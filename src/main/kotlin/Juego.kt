@@ -4,7 +4,7 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
 
     fun iniciar() {
         println("¡Bienvenido al juego del Ahorcado!")
-        println("La palabara tiene ${palabra.palabraOculta.length+1} letras")
+        println("La palabara tiene ${palabra.palabraOculta.length} letras")
 
         while ((jugador.intentos >= 0)) {
             println("Palabra: ${palabra.obtenerProgreso()}")
@@ -18,8 +18,7 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
             if (!jugador.intentarLetra(letra)) {
                 println("Letra no válida o ya utilizada. Intenta otra vez.")
             }
-
-            if (letra in palabra.palabraOculta) {
+            else if (letra in palabra.palabraOculta) {
                 println("¡Bien hecho! La letra '$letra' está en la palabra.")
                 jugador.intentarLetra(letra)
                 palabra.revelarLetra(letra)

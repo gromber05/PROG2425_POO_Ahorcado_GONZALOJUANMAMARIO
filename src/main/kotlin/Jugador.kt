@@ -15,7 +15,6 @@ class Jugador(intentosMaximos: Int) {
             fallarIntento()
             return true
         } else {
-            fallarIntento()
             return false
         }
 
