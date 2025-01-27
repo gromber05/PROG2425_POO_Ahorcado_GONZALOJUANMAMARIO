@@ -8,7 +8,7 @@ fun main() {
     do {
         val palabraOculta = palabras.pop()
         if (palabraOculta != null) {
-            val jugador = Jugador(intentosMaximos = 6)
+            val jugador = Jugador(intentosMaximos = 10)
             val juego = Juego(palabraOculta, jugador)
 
             juego.iniciar()

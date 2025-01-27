@@ -6,7 +6,9 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
         println("¡Bienvenido al juego del Ahorcado!")
         println("La palabara tiene ${palabra.palabraOculta.length} letras")
 
-        while ((jugador.intentos >= 0)) {
+        var terminado = false
+
+        while (!terminado) {
             println("Palabra: ${palabra.obtenerProgreso()}")
             println("Intentos restantes: ${jugador.intentos}")
             println("Letras usadas: ${jugador.obtenerLetrasUsadas()}")
@@ -24,8 +26,12 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
                 palabra.revelarLetra(letra)
             }
 
+            if (jugador.intentos >= 0) {
+                terminado = true
+            }
+
             if (palabra.esCompleta()) {
-                return
+                terminado = true
             }
         }
 

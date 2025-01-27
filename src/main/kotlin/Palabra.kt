@@ -16,7 +16,7 @@ class Palabra(val palabraOculta: String) {
         for (letraOculta in palabraOculta) {
             i += 1
             if (letra == letraOculta) {
-                progreso[i] = letra
+                progreso[i-1] = letra
             }
         }
     }
