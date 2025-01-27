@@ -4,35 +4,28 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
 
     fun iniciar() {
         println("¡Bienvenido al juego del Ahorcado!")
-        println("La palabara tiene ${palabra.palabraOculta.length} letras")
+        println("La palabara tiene ${palabra.palabraOculta.length+1} letras")
 
-        var terminado = false
 
-        while (!terminado) {
+        while ((jugador.intentos != 0) or !palabra.esCompleta()) {
             println("Palabra: ${palabra.obtenerProgreso()}")
             println("Intentos restantes: ${jugador.intentos}")
             println("Letras usadas: ${jugador.obtenerLetrasUsadas()}")
             println("Introduce una letra: ")
 
-            val letra: Char = readln().lowercase().firstOrNull()!!.toChar()
+            val letra: Char = readln().trim().lowercase().firstOrNull()!!.toChar()
             require(letra.isLetter())
 
             if (!jugador.intentarLetra(letra)) {
                 println("Letra no válida o ya utilizada. Intenta otra vez.")
             }
-            else if (letra in palabra.palabraOculta) {
+
+            if (letra in palabra.palabraOculta) {
                 println("¡Bien hecho! La letra '$letra' está en la palabra.")
                 jugador.intentarLetra(letra)
                 palabra.revelarLetra(letra)
             }
 
-            if (jugador.intentos >= 0) {
-                terminado = true
-            }
-
-            if (palabra.esCompleta()) {
-                terminado = true
-            }
         }
 
         if (palabra.esCompleta()) {
@@ -40,7 +33,6 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
         } else {
             println("\nLo siento, te has quedado sin intentos. La palabra era: ${palabra.palabraOculta}")
         }
-
 
     }
 
