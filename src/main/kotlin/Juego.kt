@@ -13,17 +13,16 @@ class Juego(val palabra: Palabra, val jugador: Jugador) {
             println("Letras usadas: ${jugador.obtenerLetrasUsadas()}")
             println("Introduce una letra: ")
 
-            val letra: Char = readln().trim().lowercase().firstOrNull()!!.toChar()
-            require(letra.isLetter())
+            val letra = readln().lowercase().firstOrNull()
 
-            if (!jugador.intentarLetra(letra)) {
+            if (letra == null || jugador.intentarLetra(letra)) {
                 println("Letra no válida o ya utilizada. Intenta otra vez.")
-            }
+            } else {
 
-            if (letra in palabra.palabraOculta) {
-                println("¡Bien hecho! La letra '$letra' está en la palabra.")
-                jugador.intentarLetra(letra)
-                palabra.revelarLetra(letra)
+                if (palabra.revelarLetra(letra)) {
+                    println("¡Bien hecho! La letra '$letra' está en la palabra.")
+                }
+
             }
 
         }

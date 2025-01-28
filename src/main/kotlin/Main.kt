@@ -31,10 +31,21 @@ fun Char.quitarAcentos(): Char {
     sobre el cual la función de extensión será llamada. Dentro de la función de extensión, puedes acceder
     a las propiedades y métodos de esta instancia utilizando this.
     */
+    val volcaleAcentuadas = mapOf(
+        'á' to 'a',
+        'é' to 'e',
+        'í' to 'i',
+        'ó' to 'o',
+        'ú' to 'u',
+        'á' to 'a',
+        'é' to 'e',
+        'í' to 'i',
+        'ó' to 'o',
+        'ú' to 'u')
 
-    
-    return 'a'
+    return volcaleAcentuadas[this] ?: this
 }
+
 
 /**
  * Elimina y retorna un elemento aleatorio de este [MutableSet].

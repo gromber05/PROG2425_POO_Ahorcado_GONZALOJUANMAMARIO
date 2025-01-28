@@ -11,14 +11,20 @@ class Palabra(val palabraOculta: String) {
 
     private val progreso = Array(palabraOculta.length) { '_' }
 
-    fun revelarLetra(letra: Char) {
-        var i = 0
+    fun revelarLetra(letra: Char): Boolean {
+        var i = -1
         for (letraOculta in palabraOculta) {
-            i += 1
+            i++
             if (letra == letraOculta) {
-                progreso[i-1] = letra
+                progreso[i] = letra
             }
+
         }
+
+        if (i > 0) {
+            return true
+        }
+        return false
     }
 
     fun obtenerProgreso() = progreso.joinToString(" ")
