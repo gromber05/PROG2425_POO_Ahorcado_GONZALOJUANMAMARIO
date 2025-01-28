@@ -1,28 +1,23 @@
 package es.iesra.prog2425_ahorcado
 
 class Jugador(intentosMaximos: Int) {
-
     var intentos: Int = intentosMaximos
-        get() = field
         private set
-
-    private var letrasUsadas: MutableList<Char> = mutableListOf()
+    private val letrasUsadas: MutableSet<Char> = mutableSetOf()
 
     fun intentarLetra(letra: Char): Boolean {
-
-        if(letra !in letrasUsadas){
-            letrasUsadas.add(letra)
-            fallarIntento()
-            return true
-        } else {
-            return false
+        if (letra in letrasUsadas) {
+            return false // Letra ya utilizada
         }
-
+        letrasUsadas.add(letra)
+        return true
     }
 
     fun fallarIntento() {
-            --intentos
+        intentos--
     }
 
-    fun obtenerLetrasUsadas() = letrasUsadas.joinToString(" ")
+    fun obtenerLetrasUsadas(): String {
+        return letrasUsadas.joinToString(", ")
+    }
 }

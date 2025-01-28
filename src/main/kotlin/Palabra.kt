@@ -9,27 +9,7 @@ import kotlinx.coroutines.runBlocking
 
 class Palabra(val palabraOculta: String) {
 
-    private val progreso = Array(palabraOculta.length) { '_' }
-
-    fun revelarLetra(letra: Char): Boolean {
-        var i = -1
-        for (letraOculta in palabraOculta) {
-            i++
-            if (letra == letraOculta) {
-                progreso[i] = letra
-            }
-
-        }
-
-        if (i > 0) {
-            return true
-        }
-        return false
-    }
-
-    fun obtenerProgreso() = progreso.joinToString(" ")
-
-    fun esCompleta() = '_' !in progreso
+    private val progreso: Array<Char> = Array(palabraOculta.length) { '_' }
 
     companion object {
         fun generarPalabras(cantidad: Int, tamanioMin: Int, tamanioMax: Int, idioma: Idioma = Idioma.ES): MutableSet<Palabra> {
@@ -60,7 +40,7 @@ class Palabra(val palabraOculta: String) {
                             .filter { it.length in tamanioMin..tamanioMax } // Filtramos por tamaño
                             .filter { it.matches(Regex(patron)) } // Solo letras
                             .filter { !it.contains(" ") } // Excluye palabras que contengan espacios
-                            .map { Palabra(it) } // Mapeamos a la data class
+                            .map { Palabra(it) } // Mapeamos a la objetos de tipo Palabra
 
                         palabras.addAll(filtradas)
                     }
@@ -70,7 +50,27 @@ class Palabra(val palabraOculta: String) {
             }
 
             client.close()
-            return palabras
+            return palabras.take(cantidad).toMutableSet()
         }
     }
+
+    fun revelarLetra(letra: Char): Boolean {
+        var acierto = false
+        for (i in palabraOculta.indices) {
+            if (palabraOculta[i].quitarAcentos() == letra.quitarAcentos()) {
+                progreso[i] = palabraOculta[i]
+                acierto = true
+            }
+        }
+        return acierto
+    }
+
+    fun obtenerProgreso(): String {
+        return progreso.joinToString(" ")
+    }
+
+    fun esCompleta(): Boolean {
+        return !progreso.contains('_')
+    }
 }
+
